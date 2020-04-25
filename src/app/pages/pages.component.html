@@ -1,0 +1,10 @@
+<div *ngIf="maxPage > 1">
+  <h2>{{ errorMsg }}</h2>
+  <div class="buttons">
+    <button (click)="goto(1)"><<</button>
+    <button (click)="prev()"><</button>
+    <button>{{ current_page }}</button>
+    <button (click)="next()">></button>
+    <button (click)="goto(maxPage)">>></button>
+  </div>
+</div>

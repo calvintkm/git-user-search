@@ -1,0 +1,31 @@
+@import "../../mixin";
+
+.buttons {
+  @include displayFlex();
+  margin-bottom: 2em;
+  button {
+    position: relative;
+    border: 0;
+    background: unset;
+    font-size: 24px;
+    font-family: inherit;
+    line-height: 1.4;
+    cursor: pointer;
+    width: 35px;
+    &:focus {
+      outline-width: 0;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+    &:active {
+      top: -5px;
+    }
+  }
+}
+
+h2 {
+  text-align: center;
+  color: red;
+}

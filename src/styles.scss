@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&family=Roboto+Slab&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+.none,
+.display-none {
+  display: none;
+}
+
+body {
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+  cursor: default;
+  overflow-x: hidden;
+}

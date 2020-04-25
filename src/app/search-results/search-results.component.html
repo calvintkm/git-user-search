@@ -1,0 +1,107 @@
+<!-- <h1>{{ (results$ | async).total_count }}</h1> -->
+
+<div
+  [ngClass]="{ none: (results$ | async).current_page == 0 }"
+  *ngIf="results$ | async; let results"
+>
+  <div class="title">
+    <h2 *ngIf="results.total_count > 0; else emptyMsg">
+      Displaying
+      {{ results.current_page | pageNumber: results.total_count }} users out of
+      {{ results.total_count }} results.
+    </h2>
+    <ng-template #emptyMsg>
+      <h2>
+        there are no users matching your query "{{ search.q }}", please try
+        again
+      </h2></ng-template
+    >
+    <div
+      class="sorting-menu"
+      [ngClass]="{ open: menuIsOpen }"
+      (click)="toggleMenu()"
+    >
+      <div class="bg" (click)="closeMenu($event)"></div>
+      Sort: {{ sortOptions[activeSortIndex] }}
+      <img src="../../assets/down-arrow.svg" alt="" />
+      <div class="sorting-menu-options">
+        <div
+          *ngFor="let option of sortOptions; let i = index"
+          [ngClass]="{ active: isActiveOption(option) }"
+          (click)="setActiveSortIndex(i)"
+        >
+          {{ option }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="results_wrapper">
+    <div class="result" *ngFor="let result of results.items">
+      <img src="{{ result.avatar_url }}" alt="" />
+      <div class="result-wrapper">
+        <div class="login">
+          <span>{{ result.login }}</span>
+
+          <div class="details" *ngIf="result.details; let details">
+            <div>
+              name:
+              <span class="font-weight-normal">{{
+                details.name | dashIfNull
+              }}</span
+              >,
+            </div>
+            <div>
+              hireable:
+              <span class="font-weight-normal">{{
+                details.hireable | dashIfNull
+              }}</span
+              >,
+            </div>
+            <div>
+              email:
+              <span class="font-weight-normal">{{
+                details.email | dashIfNull
+              }}</span
+              >,
+            </div>
+            <div>
+              followers:
+              <span class="font-weight-normal">{{
+                details.followers | dashIfNull
+              }}</span
+              >,
+            </div>
+            <div>
+              public repos:
+              <span class="font-weight-normal">{{
+                details.public_repos | dashIfNull
+              }}</span
+              >,
+            </div>
+            <div>
+              location:
+              <span class="font-weight-normal">{{
+                details.location | dashIfNull
+              }}</span>
+            </div>
+            <div>
+              <img src="../../assets/github.svg" alt="" />
+              <a href="{{ details.html_url }}">
+                {{ result.login }}'s' github page</a
+              >
+            </div>
+            <div>
+              bio:<span class="font-weight-normal">{{
+                details.bio | dashIfNull
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <span (click)="loadUserDetails(result.login)" *ngIf="!result.details">
+          view more
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="pages"></div>
+</div>

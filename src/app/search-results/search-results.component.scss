@@ -1,0 +1,148 @@
+@import "../../mixin";
+
+.title {
+  @include displayFlex(space-between);
+  position: relative;
+}
+
+.sorting-menu {
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 30px;
+  height: 30px;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.sorting-menu > img {
+  transition: 0.3s;
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: 2px;
+  transform-origin: center;
+}
+
+.sorting-menu.open {
+  overflow: visible;
+}
+.sorting-menu.open > img {
+  transform: rotate(180deg);
+}
+
+.open > .bg {
+  width: 300vw;
+  position: fixed;
+  height: 300vh;
+  top: -100vh;
+  left: -100vh;
+  opacity: 0;
+}
+
+.sorting-menu-options {
+  background-color: white;
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    @include wh(15px, 15px);
+    top: 0px;
+    left: 80%;
+    transform: translate(-71%, -10px) rotate(45deg);
+    background-color: white;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+  }
+
+  position: absolute;
+  margin-top: 20px;
+  left: 50%;
+  transform: translateX(-60%);
+  border: 2px solid black;
+  border-radius: 10px;
+  & > div {
+    white-space: nowrap;
+
+    position: relative;
+    padding: 5px 10px 5px 30px;
+  }
+  & > div:first-child {
+    border-radius: 8px 8px 0 0;
+  }
+
+  & > div:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+  & > div.active {
+    &::before {
+      content: "";
+      display: block;
+      @include wh(15px, 15px);
+      background: url("../../assets/tick.svg") no-repeat center center;
+      background-size: contain;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(5px, -50%);
+    }
+  }
+
+  & > div:hover {
+    background-color: grey;
+    color: white;
+  }
+}
+.font-weight-normal {
+  font-weight: normal;
+}
+.result {
+  padding: 10px 0;
+  @include displayFlex(flex-start);
+  font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  img {
+    @include wh(60px, 60px);
+    border-radius: 50%;
+  }
+  .login {
+    text-transform: capitalize;
+    & > span:first-child {
+      margin-left: 15px;
+    }
+  }
+  .details {
+    margin-top: 5px;
+    @include displayFlex(flex-start);
+    flex-wrap: wrap;
+    & > div {
+      height: auto;
+      min-height: 14px;
+      line-height: 14px;
+      font-size: 12px;
+      margin: 0 15px;
+    }
+
+    img {
+      @include wh(13px, 13px);
+    }
+  }
+  .result-wrapper {
+    width: 100%;
+    @include displayFlex(space-between);
+    padding: 0 15px;
+
+    & > span {
+      color: #70a1ff;
+      cursor: pointer;
+      float: right;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &:not(:last-child) {
+    border-bottom: 2px solid #e2e1e6;
+  }
+}

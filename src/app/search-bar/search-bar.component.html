@@ -1,0 +1,81 @@
+<div class="title">
+  Search for
+  <span class="blue-btn blue"> {{ searchState }}s </span>
+  <span [ngClass]="{ 'display-none': isUser() }"
+    >across Github’s 165M Repos</span
+  >
+  <span [ngClass]="{ 'display-none': !isUser() }"
+    >from Github's 53M user base</span
+  >
+</div>
+
+<form class="search" (submit)="updateSearch(1)">
+  <input #searchBar type="text" name="" id="" placeholder="{{ placeholder }}" />
+  <button (click)="updateSearch(1)">
+    <img src="../../assets/search.svg" alt="" srcset="" />
+  </button>
+</form>
+<p style="color: red;" *ngIf="errorMsg.length > 0">{{ errorMsg }}</p>
+<span class="tip">
+  <b>ProTip!</b> &nbsp; find user by country, language and other parameters by
+  <b (click)="toggleFilter()" class="blue-btn">clicking here</b>
+  <span *ngIf="noOfFiltersAppllied > 0">
+    - {{ noOfFiltersAppllied }} filter(s) applied!</span
+  >
+</span>
+
+<div class="filters" [ngClass]="{ open: openFilter }">
+  <div class="bg" (click)="toggleFilter()"></div>
+
+  <form #f="ngForm" (ngSubmit)="setFilter(f)">
+    <h2>User options</h2>
+    <label for="fullname">With this full name</label>
+    <input
+      type="text"
+      id="fullname"
+      autocomplete="no"
+      ngModel
+      name="fullname"
+      placeholder="Grace Hoppper"
+    />
+    <label for="location">From this location</label>
+    <input
+      type="text"
+      class="form-control"
+      id="location"
+      autocomplete="no"
+      ngModel
+      name="location"
+      placeholder="San Fransico, CA"
+    />
+    <label for="followers">With this many followers</label>
+    <input
+      type="text"
+      id="followers"
+      autocomplete="no"
+      ngModel
+      name="followers"
+      placeholder="20..50, >200, <2"
+    />
+    <label for="repos">With this many public respositories </label>
+    <input
+      type="text"
+      id="repos"
+      autocomplete="no"
+      ngModel
+      name="repos"
+      placeholder="0, <42, >5"
+    />
+    <label for="language">Working in this language</label>
+    <input
+      type="text"
+      id="language"
+      autocomplete="no"
+      ngModel
+      name="language"
+      placeholder="PHP"
+    />
+
+    <button type="submit">done</button><button type="reset">reset</button>
+  </form>
+</div>
